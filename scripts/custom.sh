@@ -10,8 +10,12 @@
 
 # Mod zzz-default-settings
 pushd package/emortal/default-settings/files
-sed -i '/http/d' zzz-default-settings
-sed -i '/openwrt_luci/d' zzz-default-settings
+sed -i '/http/d' 99-default-settings
+sed -i '/openwrt_luci/d' 99-default-settings
+rm -rf 99-default-settings-chinese
+pushd package/emortal/autocore/files/generic
+sed -i '/footer/d' index.htm
+popd
 popd
 
 # Add date version
@@ -31,7 +35,7 @@ pushd package/kernel/mt76
 sed -i '/mt7662u_rom_patch.bin/a\\techo mt76-usb disable_usb_sg=1 > $\(1\)\/etc\/modules.d\/mt76-usb' Makefile
 popd
 
-# Rename hostname to OpenWrt
+# Rename hostname to S3Wrt
 pushd package/base-files/files/bin
 sed -i 's/ImmortalWrt/S3Wrt/g' config_generate
 popd
