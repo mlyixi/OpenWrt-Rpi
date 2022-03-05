@@ -12,15 +12,16 @@
 pushd package/emortal/default-settings/files
 sed -i '/http/d' 99-default-settings
 sed -i '/openwrt_luci/d' 99-default-settings
+sed -i '/openwrt_banner/d' 99-default-settings
 sed -i 's/^/#/g' 99-default-settings-chinese
-pushd package/emortal/autocore/files/generic
-sed -i '/footer/d' index.htm
 popd
-popd
+
+sed -i 's/ImmortalWrt/S3Wrt/g' include/version.mk
 
 # Add date version
 export DATE_VERSION=$(date -d "$(rdate -n -4 -p pool.ntp.org)" +'%Y-%m-%d')
 sed -i "s/%C/%C (${DATE_VERSION})/g" package/base-files/files/etc/openwrt_release
+sed -i "s/ash/zsh/g" package/base-files/files/etc/shells
 
 # Clone community packages to package/community
 mkdir package/community
