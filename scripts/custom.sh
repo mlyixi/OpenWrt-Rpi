@@ -12,7 +12,7 @@
 pushd package/emortal/default-settings/files
 sed -i '/http/d' 99-default-settings
 sed -i '/openwrt_luci/d' 99-default-settings
-rm -rf 99-default-settings-chinese
+sed -i 's/^/#/g' 99-default-settings-chinese
 pushd package/emortal/autocore/files/generic
 sed -i '/footer/d' index.htm
 popd
